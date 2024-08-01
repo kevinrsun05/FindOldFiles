@@ -16,7 +16,9 @@ def search(directory, months):
             file_path = os.path.join(root, file)
             try:
                 if os.path.getatime(file_path) < threshold:
-                    old_files.append(file_path)
+                    file_size = os.path.getsize(file_path) / (1024 * 1024)
+                    if file_size > 1:
+                        old_files.append((file_path, file_size))
             except (FileNotFoundError, PermissionError):
                 continue
     
@@ -27,7 +29,7 @@ def search(directory, months):
         print("No old files")
     else:
         for old_file in old_files:
-            print(old_file)
+            print(f"SIZE: {old_file[1]:.2f} MB              Path: {old_file[0]}")
 
 
 def main():
