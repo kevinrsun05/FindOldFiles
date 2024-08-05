@@ -5,6 +5,7 @@ Run the script with the following parameters (optional)
 
   1) directory path (-d argument)
   2) threshold in months (-m argument)
+
 The default values are your HOME directory and 12 months
 
 **Example running the script**
