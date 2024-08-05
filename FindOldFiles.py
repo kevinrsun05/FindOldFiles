@@ -22,6 +22,8 @@ def search(directory, months):
             except (FileNotFoundError, PermissionError):
                 continue
     
+    print()
+    print("Directory:", directory)
     print("Threshold:", months, "months")
     print()
     print("Old Files:")
@@ -30,16 +32,14 @@ def search(directory, months):
     else:
         for old_file in old_files:
             print(f"SIZE: {old_file[1]:.2f} MB              Path: {old_file[0]}")
+    print()
 
 
 def main():
     parser = argparse.ArgumentParser(description = "Search for files that haven't been accessed in a long time")
-    parser.add_argument("directory", type=str, help="Directory to search in")
-    parser.add_argument("months", type=float, help="Threshold in months")
+    parser.add_argument("-d", "--directory", nargs = "?", type=str, default = "~", help="Directory to search in")
+    parser.add_argument("-m", "--months", nargs = "?", type=float, default = "12", help="Threshold in months")
     args = parser.parse_args()
-
-    if len(vars(args)) != 2:
-        parser.error("Please only pass in the number of months and directory to search in")
 
     search(args.directory, args.months)
 
